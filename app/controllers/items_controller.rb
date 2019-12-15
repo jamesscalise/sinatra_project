@@ -6,7 +6,7 @@ class ItemsController < App
   get '/items/new' do
   end
   
-  post '/items'
+  post '/items' do
   end
   
   get '/items/:id' do
