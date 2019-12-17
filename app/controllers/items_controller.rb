@@ -33,13 +33,35 @@ class ItemsController < App
 
 
   get '/items/:id/edit' do
-    
+    if !logged_in?
+      redirect '/login'
+    else
+      @item = Tweet.find(params[:id])
+        if @item.user != current_user
+          redirect "items/#{params[:id]}"
+        else
+          erb :'items/edit_item'
+        end
+    end
   end
   
   patch '/items/:id' do
+    @item = Item.find(params[:id])
+    if !params[:item_name].empty?
+      @item.item_name = params[:item_name]
+      @item.save
+      redirect "/items/#{params[:id]}"
+    else
+      redirect "/items/#{params[:id]}/edit"
+    end
   end
   
   delete '/items/:id' do
+     @item = Item.find(params[:id])
+    if logged_in? && @item.user == current_user
+      @item.delete
+    end
+    redirect '/items'
   end
 
 end
