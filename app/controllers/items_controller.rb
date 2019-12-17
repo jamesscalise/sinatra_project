@@ -11,15 +11,15 @@ class ItemsController < App
   
   get '/items/new' do
     if logged_in?
-      erb :'items/new'
+      erb :'items/new_item'
     else
       redirect '/login'
     end
   end
   
   post '/items' do
-     params[:name] != ""
-     @item = Item.create(content: params[:name], user: current_user)
+     if params[:name] != ""
+     @item = Item.create(item_name: params[:name], user: current_user)
       redirect "/items/#{@item.id}"
     else
      redirect '/items/new'
