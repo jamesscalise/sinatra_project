@@ -18,8 +18,8 @@ class ItemsController < App
   end
   
   post '/items' do
-     if params[:name] != ""
-     @item = Item.create(item_name: params[:name], user: current_user)
+     if params[:item_name] != ""
+     @item = Item.create(item_name: params[:item_name], user: current_user)
       redirect "/items/#{@item.id}"
     else
      redirect '/items/new'
@@ -36,7 +36,7 @@ class ItemsController < App
     if !logged_in?
       redirect '/login'
     else
-      @item = Tweet.find(params[:id])
+      @item = Item.find(params[:id])
         if @item.user != current_user
           redirect "items/#{params[:id]}"
         else
