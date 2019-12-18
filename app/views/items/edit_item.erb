@@ -1,0 +1,12 @@
+<form action='/items/<%= @item.id %>' method="post">
+        <input id="hidden" type="hidden" name="_method" value="patch">
+
+    Change the item's name:
+    <%= @item.content %>
+    <input type="text" name="item_name"><br>
+    Submit:
+
+    <input type="submit" value="submit" id="submit">
+
+
+  </form>
